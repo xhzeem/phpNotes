@@ -1,0 +1,41 @@
+SQLi
+1. SQL injection login bypass (logged-in as admin, and password != admin's pass)
+CyberX{e947c33096ce026eaab6a988ca59f701}
+2. search bar SQLi (give flag if any returned note is not owned by this user)
+CyberX{7c6483dd8899eb112c060ecbe0543e86}
+
+Business Logic
+1. is_admin regestration paramter (flag when this paramter = true)
+CyberX{507e04e8a2b97ef8089b40c895c2551e}
+2. coins > 0 regestration paramter (flag when this coins > 0)
+CyberX{785031e1f84c167a2409ee0611350f30}
+3. Logic vulnerability bypass payment gateway (set price to 0 in post request to payment_gateway.php)
+CyberX{8f1f6224ba39be1bf6c0e80938599a98}
+
+IDORs
+1. secret note with id 10 (IDOR to get notes in note.php)
+CyberX{7c6483ddcd99eb112c060ecbe0543e86}
+2. IDOR in create note with creator_id (Give flag if creator_id != $user_id)
+CyberX{baa7e6902efcbccb886ba80c70d6d148}
+3. IDOR view someone else profile (user with profile 11 has flag)
+CyberX{67113a029bf9f33a1b53977419f70fb2}
+
+Access Control
+1. Access Control (change someone else's password) - not working
+CyberX{e0b3a8667c7ea10bf9fe6140a6e063f5} 
+2. Access admin.php
+CyberX{30b6ba80c70d6d10bf9fe640a6e063f1} 
+
+
+Browser
+12. flag in cookies
+CyberX{4c2a904bafba06591225113ad17b5cec}
+13. flag in js obfuscated localstorage
+CyberX{localstorage}
+
+XSS
+1. xss in note title (in note.php page)
+2. XSS in coins count in the pay.php page (coins paramter)
+3. Search bar xss (Manual ask for points)
+
+
