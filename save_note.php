@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $creator_id = $_POST['creator_id'];
     if($creator_id != $user_id)
     {
-        echo '<div class="alert alert-success" role="alert">You are a new creator? So creative, here is your flag: CyberX{baa7e6902efcbccb886ba80c70d6d148}</div>';
+        echo '<div class="alert alert-success" role="alert">You are a new creator? So creative, here is your flag: FLAG{baa7e6902efcbccb886ba80c70d6d148}</div>';
     }else{
         // Retrieve user's current coin balance from the database
     $sql = "SELECT coins FROM users WHERE id = ?";

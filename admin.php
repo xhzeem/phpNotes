@@ -1,1 +1,1 @@
-Nice try, here is your flag: CyberX{30b6ba80c70d6d10bf9fe640a6e063f1}
+Nice try to get the admin page, here is your flag: FLAG{30b6ba80c70d6d10bf9fe640a6e063f1}

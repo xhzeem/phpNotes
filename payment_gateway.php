@@ -14,7 +14,7 @@
         $stmt->bind_param("ii", $coins, $user_id);
         $stmt->execute();
 
-        echo '<div class="alert alert-success" role="alert">Nice Job, You bypassed the payment system, your flag is: CyberX{8f1f6224ba39be1bf6c0e80938599a98}</div>';
+        echo '<div class="alert alert-success" role="alert">Nice Job, You bypassed the payment system, your flag is: FLAG{8f1f6224ba39be1bf6c0e80938599a98}</div>';
     }
 ?>
 

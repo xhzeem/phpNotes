@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($_SESSION['user_id'] != $update_user_id){
-        echo '<div class="alert alert-success" role="alert">Nice Job, you updated some else\'s password. your flag is: CyberX{e0b3a8667c7ea10bf9fe6140a6e063f5}</div>';
+        echo '<div class="alert alert-success" role="alert">Nice Job, you updated some else\'s password. your flag is: FLAG{e0b3a8667c7ea10bf9fe6140a6e063f5}</div>';
     }
 }
 ?>

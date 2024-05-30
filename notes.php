@@ -2,7 +2,7 @@
 session_start();
 require_once 'db.php';
 $cookie_name = "secret";
-    $cookie_value = "CyberX{4c2a904bafba06591225113ad17b5cec}";
+    $cookie_value = "FLAG{4c2a904bafba06591225113ad17b5cec}";
     setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 
 // Check if user is logged in
@@ -60,7 +60,7 @@ if ($result->num_rows > 0) {
     $user_coins = $row['coins'];
 }
 if ($user_id == 1){
-    echo '<div class="alert alert-success" role="alert">Nice Job, you hacked the admin account flag is: CyberX{e947c33096ce026eaab6a988ca59f701}</div>';
+    echo '<div class="alert alert-success" role="alert">Nice Job, you hacked the admin account flag is: FLAG{e947c33096ce026eaab6a988ca59f701}</div>';
 }
 ?>
 

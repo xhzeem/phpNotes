@@ -15,10 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssi", $username, $password, $coins);
     $stmt->execute();
     if($_POST['coins'] > 0){
-        echo '<div class="alert alert-success" role="alert">Nice Job, your have more coins now!!, your flag is: CyberX{785031e1f84c167a2409ee0611350f30}</div>';
+        echo '<div class="alert alert-success" role="alert">Nice Job, your have more coins now!!, your flag is: FLAG{785031e1f84c167a2409ee0611350f30}</div>';
     }
     if(strtolower($_POST['is_admin']) == 'true'){
-        echo '<div class="alert alert-success" role="alert">Nice Job, your changed to admin, your flag is: CyberX{507e04e8a2b97ef8089b40c895c2551e}</div>';
+        echo '<div class="alert alert-success" role="alert">Nice Job, your changed to admin, your flag is: FLAG{507e04e8a2b97ef8089b40c895c2551e}</div>';
     }else{
         header('Location: login.php');
         exit;
