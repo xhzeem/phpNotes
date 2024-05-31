@@ -35,6 +35,8 @@ if (isset($_REQUEST['coins'])) {
             <input type="hidden" name="price" value="<?php echo $price; ?>">
             <button type="submit" class="btn btn-success">Proceed to Payment</button>
         </form>
+        <hr>
+        <a href="buy.php" class="btn btn-secondary">Back</a>
     </div>
 </body>
 </html>

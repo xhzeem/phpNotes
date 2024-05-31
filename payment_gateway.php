@@ -3,10 +3,13 @@
     require_once 'db.php';
 
     // Retrieve number of coins and price from URL parameters
-    $coins = isset($_REQUEST['coins']) ? intval($_REQUEST['coins']) : 0;
-    $price = isset($_REQUEST['price']) ? intval($_REQUEST['price']) : 0;
+    $coins = isset($_REQUEST['coins']) ? intval($_REQUEST['coins']) : 1;
+    $price = isset($_REQUEST['price']) ? intval($_REQUEST['price']) : $coins*3;
 
-    if ($price < 1 && $coins > 0) {
+    $bypass = false;
+
+    if ($price == 0 && $coins > 0) {
+        $bypass = true;
         $user_id = $_SESSION['user_id'];
     
         $update_sql = "UPDATE users SET coins = coins + ? WHERE id = ?";
@@ -35,8 +38,16 @@
             <p><strong>Number of Coins:</strong> <?php echo $coins; ?></p>
             <p><strong>Total Price:</strong> $<?php echo $price; ?></p>
         </div>
-        
+
+        <?php if ($bypass): ?>
         <!-- Credit Card Form -->
+        <!-- Success Message -->
+        <div class="alert alert-warning" role="alert">
+            Thanks for buying from the store, you bought <?php echo "$coins coins for $$price!"; ?> 
+        </div>
+        <hr>
+        <a href="notes.php" class="btn btn-secondary">Back To Home</a>
+        <?php else: ?>
         <div class="card p-4">
             <h4 class="mb-3">Enter Credit Card Details</h4>
             <form method="post">
@@ -56,7 +67,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit Payment</button>
             </form>
+            <hr>
+            <a href="notes.php" class="btn btn-secondary">Back To Home</a>
         </div>
+        <?php endif; ?>
     </div>
 </body>
 </html>

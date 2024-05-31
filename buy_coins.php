@@ -16,6 +16,9 @@
             </div>
             <button type="submit" class="btn btn-primary">Buy Coins</button>
         </form>
+        <hr>
+        <a href="notes.php" class="btn btn-secondary">Back to Notes</a>
+        <a href="logout.php" class="btn btn-danger float-right">Logout</a>
     </div>
 </body>
 </html>

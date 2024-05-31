@@ -12,32 +12,22 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+$notes = array(); 
 $search_keyword = isset($_GET['search']) ? trim($_GET['search']) : '';
+//mysqli_report(MYSQLI_REPORT_ERROR);
 
 // Retrieve user's notes based on search keyword (if provided)
 if (!empty($search_keyword)) {
-    // Search notes based on title or content containing the search keyword
-    $search_pattern = "%$search_keyword%";
-    // $temp_sql = "SELECT id, title, content FROM notes WHERE user_id = ? AND (title LIKE $search_pattern OR content LIKE $search_pattern)";
-    // $sql = $temp_sql;
-    // $stmt = $conn->prepare($sql);
-    // $stmt->bind_param("i", $user_id);
-    // $stmt->execute();
-    // $result = $stmt->get_result();
-    // $notes = $result->fetch_all(MYSQLI_ASSOC);
-  
     // enable the sql errors
-    //mysqli_report(MYSQLI_REPORT_ERROR);
-    $sql = "SELECT * FROM notes WHERE title LIKE '%$search_keyword%' AND user_id = $user_id;";
-    $result = $conn->query($sql);
-    if ($result) {
+    try {
+        $sql = "SELECT * FROM notes WHERE title LIKE '%$search_keyword%' AND user_id = $user_id;";
+        $result = $conn->query($sql);
         $notes = $result->fetch_all(MYSQLI_ASSOC);
-    } else {
-        // Handle SQL error
-        echo "<div class='alert alert-danger' role='alert'>Error in SQL statment: $sql</div>";
-        
-        // Set $notes to an empty array if query fails
-        $notes = array(); 
+    } catch (mysqli_sql_exception $e) {
+        // Display the error message in the page
+        echo "<div class='alert alert-danger' role='alert'>Error in SQL statement: " . htmlspecialchars($sql) . "</div>";
+        // Optionally log the error message for debugging
+        error_log("SQL error: " . $e->getMessage());
     }
 } else {
     // Retrieve all notes for the logged-in user
@@ -59,8 +49,12 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $user_coins = $row['coins'];
 }
-if ($user_id == 1){
-    echo '<div class="alert alert-success" role="alert">Nice Job, you hacked the admin account flag is: FLAG{e947c33096ce026eaab6a988ca59f701}</div>';
+// Check if the user came from login.php
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'login.php') !== false) {
+    // Add your existing code here
+    if ($user_id == 1) {
+        echo '<div class="alert alert-success" role="alert">Nice Job, you hacked the admin account flag is: FLAG{e947c33096ce026eaab6a988ca59f701}</div>';
+    }
 }
 ?>
 

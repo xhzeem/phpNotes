@@ -14,15 +14,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssi", $username, $password, $coins);
     $stmt->execute();
-    if($_POST['coins'] > 0){
-        echo '<div class="alert alert-success" role="alert">Nice Job, your have more coins now!!, your flag is: FLAG{785031e1f84c167a2409ee0611350f30}</div>';
+    
+    if ($_POST['coins'] > 0) {
+        echo '<div class="alert alert-success" role="alert">Nice Job, you have more coins now!! Your flag is: FLAG{785031e1f84c167a2409ee0611350f30}</div>';
     }
-    if(strtolower($_POST['is_admin']) == 'true'){
-        echo '<div class="alert alert-success" role="alert">Nice Job, your changed to admin, your flag is: FLAG{507e04e8a2b97ef8089b40c895c2551e}</div>';
-    }else{
+    
+    if (strtolower($_POST['is_admin']) == 'true') {
+        echo '<div class="alert alert-success" role="alert">Nice Job, you changed to admin! Your flag is: FLAG{507e04e8a2b97ef8089b40c895c2551e}</div>';
+    }
+    
+    if ($_POST['coins'] = 0 && strtolower($_POST['is_admin']) == 'false') {
         header('Location: login.php');
         exit;
     }
+    
     
     
 }
