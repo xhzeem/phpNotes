@@ -10,10 +10,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $coins = $_POST['coins'];
-    $sql = "INSERT INTO users (username, password, coins) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssi", $username, $password, $coins);
-    $stmt->execute();
+    
+    // Check if the username already exists
+    $check_sql = "SELECT COUNT(*) FROM users WHERE username = ?";
+    $check_stmt = $conn->prepare($check_sql);
+    $check_stmt->bind_param("s", $username);
+    $check_stmt->execute();
+    $check_stmt->bind_result($user_count);
+    $check_stmt->fetch();
+    $check_stmt->close();
+
+    if ($user_count > 0) {
+        echo '<div class="alert alert-danger" role="alert">Error: Username already exists.</div>';
+    } else {
+        $sql = "INSERT INTO users (username, password, coins) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssi", $username, $password, $coins);
+        $stmt->execute();
+        
+        if ($stmt->affected_rows > 0) {
+            echo '<div class="alert alert-success" role="alert">User registered successfully!</div>';
+        } else {
+            echo '<div class="alert alert-danger" role="alert">Error: Could not register user.</div>';
+        }
+
+        $stmt->close();
+    }
+
     
     if ($_POST['coins'] > 0) {
         echo '<div class="alert alert-success" role="alert">Nice Job, you have more coins now!! Your flag is: FLAG{785031e1f84c167a2409ee0611350f30}</div>';
@@ -22,13 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strtolower($_POST['is_admin']) == 'true') {
         echo '<div class="alert alert-success" role="alert">Nice Job, you changed to admin! Your flag is: FLAG{507e04e8a2b97ef8089b40c895c2551e}</div>';
     }
-    
-    if ($_POST['coins'] = 0 && strtolower($_POST['is_admin']) == 'false') {
-        header('Location: login.php');
-        exit;
-    }
-    
-    
     
 }
 ?>
